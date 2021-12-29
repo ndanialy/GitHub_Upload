@@ -69,10 +69,15 @@ loan = {
     "future_value": 1000,
 }
 
+
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
 # YOUR CODE HERE!
 
+future_value = loan.get("future_value")
+remaining_months = loan.get("remaining_months")
+
+print(f"The future value of the loan is {future_value} with {remaining_months} months remaining.")
 
 # @TODO: Use the formula for Present Value to calculate a "fair value" of the loan.
 # Use a minimum required return of 20% as the discount rate.
@@ -81,12 +86,27 @@ loan = {
 
 # YOUR CODE HERE!
 
+discount_rate = .2
+
+def discount(FV,R,N):                                                      #Defining a function for discounting future value and returning present value.
+    PV = FV/((1+(R/12))**N)
+    return(PV)
+
+loan_pv = discount(future_value,discount_rate,remaining_months)            #Calculating the present value of the given loan.
+print(f"The present value of the loans is {loan_pv}")                      #Printing the results with a descriptive messqage
+
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
 #    If the present value of the loan is greater than or equal to the cost, then print a message that says the loan is worth at least the cost to buy it.
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
 # YOUR CODE HERE!
 
+loan_price = loan.get("loan_price")                                       #Retrieving the current loan price from the dictionary and setting it to a variable.
+
+if loan_pv >= loan_price:                                                 #The logical statement that determines whether it is worth it to purchase the loan.
+    print("The loan is worth at least the cost to buy it.")
+else:
+    print("The loan is too expensive, and not worth the price to buy it.")
 
 """Part 3: Perform Financial Calculations.
 
