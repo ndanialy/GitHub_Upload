@@ -88,12 +88,8 @@ print(f"The future value of the loan is {future_value} with {remaining_months} m
 
 discount_rate = .2
 
-def discount(FV,R,N):                                                      #Defining a function for discounting future value and returning present value.
-    PV = FV/((1+(R/12))**N)
-    return(PV)
-
-loan_pv = discount(future_value,discount_rate,remaining_months)            #Calculating the present value of the given loan.
-print(f"The present value of the loans is {loan_pv}")                      #Printing the results with a descriptive messqage
+loan_pv = future_value/((1+(discount_rate/12))**remaining_months)                                               #Calculating the present value of the given loan.
+print(f"The present value of the loans is {round(loan_pv,2)}")                      #Printing the results with a descriptive messqage
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
@@ -132,10 +128,19 @@ new_loan = {
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
 
+def discount(FV,R,N):                                                      #Defining a function for discounting future value and returning present value.
+    PV = FV/((1+(R/12))**N)
+    return(round(PV,2))
+
 
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
 # YOUR CODE HERE!
+
+annual_discount_rate = .2
+
+present_value = discount(new_loan.get("future_value"),annual_discount_rate,new_loan.get("remaining_months"))
+
 print(f"The present value of the loan is: {present_value}")
 
 
