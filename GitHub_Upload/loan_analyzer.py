@@ -19,24 +19,36 @@ loan_costs = [500, 600, 200, 1000, 450]
 # Print the number of loans from the list
 # YOUR CODE HERE!
 
-loan_number = len(loan_costs)                                          #Defining the length of the list.
-print(f"There total number of loans is: {loan_number}.")               #Printing the length of the list with a descriptive message.
+
+#Defining the length of the list and creating a variable with the value.
+loan_number = len(loan_costs)                                          
+
+#Printing the length of the list with a descriptive message.
+print(f"There total number of loans is: {loan_number}.")               
 
 # What is the total of all loans?
 # @TODO: Use the `sum` function to calculate the total of all loans in the list.
 # Print the total value of the loans
 # YOUR CODE HERE!
 
-total_amount = sum(loan_costs)                                         #Defining the total sum of the loans in the list.
-print(f"The total sum of the loans is: {total_amount}.")               #Printing the sum of the loans with a descriptive message.
+
+#Defining the total sum of the loans in the list.
+total_amount = sum(loan_costs) 
+
+#Printing the sum of the loans with a descriptive message.
+print(f"The total sum of the loans is: {total_amount}.")               
 
 # What is the average loan amount from the list?
 # @TODO: Using the sum of all loans and the total number of loans, calculate the average loan price.
 # Print the average loan amount
 # YOUR CODE HERE!
 
-average_loan = total_amount/loan_number                                #Calculating and defining the average loan amount.
-print(f"The average loan amount is: {average_loan}.")                  #Printing the average loan amount with a descriptive message.
+
+#Calculating and defining the average loan amount.
+average_loan = total_amount/loan_number                    
+
+#Printing the average loan amount with a descriptive message.            
+print(f"The average loan amount is: {average_loan}.")                  
 
 """Part 2: Analyze Loan Data.
 
@@ -74,7 +86,11 @@ loan = {
 # Print each variable.
 # YOUR CODE HERE!
 
+
+#Retrieving the future value of the loan from the dictionary and setting it to a variable.
 future_value = loan.get("future_value")
+
+#Retrieving the remaining months in the loan from the dictionary and setting it to a variable.
 remaining_months = loan.get("remaining_months")
 
 print(f"The future value of the loan is {future_value} with {remaining_months} months remaining.")
@@ -86,10 +102,14 @@ print(f"The future value of the loan is {future_value} with {remaining_months} m
 
 # YOUR CODE HERE!
 
+#Creating a variable for the discount rate based on the instructions.
 discount_rate = .2
 
-loan_pv = future_value/((1+(discount_rate/12))**remaining_months)                                               #Calculating the present value of the given loan.
-print(f"The present value of the loans is {round(loan_pv,2)}")                      #Printing the results with a descriptive messqage
+#Calculating the present value of the given loan.
+loan_pv = future_value/((1+(discount_rate/12))**remaining_months)         
+
+#Printing the results with a descriptive messqage                                    
+print(f"The present value of the loans is {round(loan_pv,2)}")                      
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
 # @TODO: Write a conditional statement (an if-else statement) to decide if the present value represents the loan's fair value.
@@ -97,12 +117,17 @@ print(f"The present value of the loans is {round(loan_pv,2)}")                  
 #    Else, the present value of the loan is less than the loan cost, then print a message that says that the loan is too expensive and not worth the price.
 # YOUR CODE HERE!
 
-loan_price = loan.get("loan_price")                                       #Retrieving the current loan price from the dictionary and setting it to a variable.
+#Retrieving the current loan price from the dictionary and setting it to a variable.
+loan_price = loan.get("loan_price")                                       
 
-if loan_pv >= loan_price:                                                 #The logical statement that determines whether it is worth it to purchase the loan.
+#The logical statement that determines whether it is worth it to purchase the loan and prints a descriptive message informing the user.
+if loan_pv >= loan_price:                                                 
     print("The loan is worth at least the cost to buy it.")
 else:
     print("The loan is too expensive, and not worth the price to buy it.")
+
+
+
 
 """Part 3: Perform Financial Calculations.
 
@@ -128,7 +153,9 @@ new_loan = {
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
 
-def discount(FV,R,N):                                                      #Defining a function for discounting future value and returning present value.
+
+#Defining a function for discounting future value and returning present value given variables for future value, annual rate, and number of periods.
+def discount(FV,R,N):                                                      
     PV = FV/((1+(R/12))**N)
     return(round(PV,2))
 
@@ -185,11 +212,13 @@ loans = [
 # @TODO: Create an empty list called `inexpensive_loans`
 # YOUR CODE HERE!
 
-inexpensive_loans = []                            #Creating an empty list
+#Creating an empty list
+inexpensive_loans = []                          
 
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
 # YOUR CODE HERE!
 
+#A for loop that will iterate through the list of loans and append the ones that meet the loan_price criteria to the inexpensive_loans list
 for loan in loans:
     if loan["loan_price"] <= 500:
         inexpensive_loans.append(loan)
@@ -225,8 +254,10 @@ output_path = Path("inexpensive_loans.csv")
 # and each row of `loan.values()` from the `inexpensive_loans` list.
 # YOUR CODE HERE!
 
-print("Exporting the data to a CSV file...")
+#Printing the message saying the data is being exported.
+print("Exporting the data to a CSV file...")                                 
 
+#A for loop that iterates through the inexpensive_loans list and exports the values row by row to a CSV file.
 csvpath = Path("inexpensive_loans.csv")
 with open(csvpath, "w") as csvfile:
     csvwriter = csv.writer(csvfile, delimiter = ",")
